@@ -49,7 +49,12 @@ function AuthForm({ onLogin }) {
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify({ id: data.id, name: data.name, email: data.email }));
-      onLogin();
+      onLogin({
+        id: data.id,
+        name: data.name,
+        email: data.email,
+      });
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -312,8 +317,14 @@ export default function App() {
   };
 
   if (!isAuthenticated) {
-    return <AuthForm onLogin={() => setIsAuthenticated(true)} />;
-  }
+return (
+    <AuthForm
+      onLogin={(userData) => {
+        setIsAuthenticated(true);
+        setUser(userData);
+      }}
+    />
+  );  }
 
   return (
     <div className="min-h-screen bg-gray-50">

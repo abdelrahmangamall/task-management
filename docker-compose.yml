@@ -1,25 +1,27 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15-alpine
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
     container_name: task-db
     environment:
-      POSTGRES_DB: taskdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      MYSQL_DATABASE: taskdb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: taskuser
+      MYSQL_PASSWORD: taskpass
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     networks:
       - task-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
+    command: --default-authentication-plugin=mysql_native_password
 
   # Spring Boot Backend
   backend:
@@ -28,16 +30,17 @@ services:
       dockerfile: Dockerfile
     container_name: task-backend
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      DB_URL: jdbc:mysql://mysql:3306/taskdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: VGhpc0lzQVZlcnlTZWN1cmVTZWNyZXRLZXlGb3JKV1RUb2tlbkdlbmVyYXRpb25NdXN0QmVMb25nRW5vdWdoRm9ySFM1MTJBbGdvcml0aG0=
+      JWT_EXPIRATION: 1209600000
+      CORS_ORIGINS: http://localhost:3000,http://localhost:5173
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      JWT_SECRET: YourSuperSecretKeyForJWTTokenGenerationMustBeLongEnoughForHS512Algorithm
-      JWT_EXPIRATION: 86400000
     ports:
       - "8080:8080"
     depends_on:
-      postgres:
+      mysql:
         condition: service_healthy
     networks:
       - task-network
@@ -49,6 +52,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: task-frontend
+    environment:
+      VITE_API_URL: http://localhost:8080/api
     ports:
       - "3000:80"
     depends_on:
@@ -58,7 +63,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgres_data:
+  mysql_data:
 
 networks:
   task-network:
