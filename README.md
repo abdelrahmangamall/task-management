@@ -14,6 +14,15 @@ The backend is built with **Spring Boot** following clean architecture principle
 
 ---
 
+## ScreenShoots
+<img width="641" height="750" alt="Screenshot 2025-12-29 035159" src="https://github.com/user-attachments/assets/c97ff88b-bff1-47c1-88f0-60e48fbfd3a8" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/698d978f-3b68-4bde-8275-3b6ba8dd603e" />
+<img width="1920" height="1020" alt="Screenshot 2025-12-29 051404" src="https://github.com/user-attachments/assets/de0b675d-8745-4fa1-bb04-f1782293f167" />
+<img width="945" height="765" alt="Screenshot 2025-12-29 034752" src="https://github.com/user-attachments/assets/9d9e48c9-0dcb-4a66-b617-9f16ef07891c" />
+<img width="1603" height="729" alt="Screenshot 2025-12-29 035051" src="https://github.com/user-attachments/assets/2f5f945c-a7f6-4fa3-896b-231fc8610b91" />
+<img width="1393" height="292" alt="Screenshot 2025-12-29 034924" src="https://github.com/user-attachments/assets/37ffe214-cf9a-4487-9d70-a0afbe3afc39" />
+
+
 ## ⚙️ Tech Stack
 
 **Backend:**
