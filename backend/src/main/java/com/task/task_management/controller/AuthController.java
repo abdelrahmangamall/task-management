@@ -37,15 +37,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-        try {
-            AuthResponse response = authService.login(request);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException e) {
-//            Map<String, String> error = new HashMap<>();
-//            error.put("error", "Invalid email or password");
-            System.out.println(e);
-            return ResponseEntity.badRequest().body(e);
+//        try {
+//            AuthResponse response = authService.login(request);
+//            return ResponseEntity.ok(response);
+//        } catch (RuntimeException e) {
+//            Map<String, String> error = new HashMap<>();error.put("error", "Invalid email or password");
+//            System.out.println(e);
+//            return ResponseEntity.badRequest().body(error);
+//
+//        }
+        return ResponseEntity.ok(authService.login(request));
 
-        }
     }
 }

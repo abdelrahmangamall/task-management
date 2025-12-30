@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, CheckCircle, Loader2, LogOut, Plus, Trash2, Edit2, X } from 'lucide-react';
 
-const API_URL = 'http://localhost:8080/api';
-
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 const api = {
   async request(endpoint, options = {}) {
     const token = localStorage.getItem('token');

@@ -17,6 +17,9 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String JWT_SECRET;
 
+    @Value("${jwt.expiration:1209600000}")
+    private Long JWT_EXPIRATION;
+
     private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -32,7 +35,7 @@ public class JwtUtil {
 
     public String generateToken(String username) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + 1000L * 60 * 60 * 24 * 14);
+        Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
 
         return Jwts.builder()
                 .setSubject(username)
