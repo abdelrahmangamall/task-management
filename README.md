@@ -161,7 +161,7 @@ This isn't just another CRUD app. Here's what I focused on:
 
 For me, this project is more than just code — it's a demonstration of my passion for backend development and building meaningful applications. I challenged myself to implement proper authentication, secure endpoints, and create a system that's ready to scale.
 
-I'm currently working on adding more features and improving the analytics side. If you have any questions, feedback, or just want to discuss development — feel free to reach out!
+I'm currently working on adding more features and improving the analytics side. If you have any questions, feedback, or just want to discuss development, feel free to reach out!
 
 ---
 
