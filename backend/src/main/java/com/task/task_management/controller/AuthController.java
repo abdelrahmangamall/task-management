@@ -25,27 +25,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
-        try {
-            AuthResponse response = authService.register(request);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", e.getMessage());
-            return ResponseEntity.badRequest().body(error);
-        }
+        return ResponseEntity.ok(authService.register(request));
+
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-//        try {
-//            AuthResponse response = authService.login(request);
-//            return ResponseEntity.ok(response);
-//        } catch (RuntimeException e) {
-//            Map<String, String> error = new HashMap<>();error.put("error", "Invalid email or password");
-//            System.out.println(e);
-//            return ResponseEntity.badRequest().body(error);
-//
-//        }
         return ResponseEntity.ok(authService.login(request));
 
     }
